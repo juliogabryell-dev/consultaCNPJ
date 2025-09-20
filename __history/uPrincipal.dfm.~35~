@@ -1,0 +1,835 @@
+object frmPrincipal: TfrmPrincipal
+  Left = 0
+  Top = 0
+  Caption = 'Consulta CNPJ'
+  ClientHeight = 680
+  ClientWidth = 1091
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 1091
+    Height = 113
+    Align = alTop
+    BevelOuter = bvNone
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 0
+    ExplicitTop = -6
+    ExplicitWidth = 553
+    object Panel5: TPanel
+      Left = 0
+      Top = 0
+      Width = 1091
+      Height = 113
+      Align = alTop
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 0
+      ExplicitTop = -6
+      ExplicitWidth = 553
+      DesignSize = (
+        1091
+        113)
+      object Panel6: TPanel
+        Left = 0
+        Top = 55
+        Width = 978
+        Height = 58
+        Anchors = [akLeft, akTop, akRight]
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 0
+        ExplicitWidth = 943
+        object edtCNPJ: TMaskEdit
+          Left = 0
+          Top = 0
+          Width = 978
+          Height = 58
+          Align = alClient
+          EditMask = '!99.999.999/9999-99;0;'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -47
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          MaxLength = 18
+          ParentFont = False
+          TabOrder = 0
+          Text = ''
+          ExplicitLeft = -3
+        end
+      end
+      object Panel4: TPanel
+        Left = 978
+        Top = 55
+        Width = 113
+        Height = 58
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        Align = alRight
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 1
+        ExplicitLeft = 943
+        object btnConsultar: TButton
+          Left = 0
+          Top = 0
+          Width = 113
+          Height = 58
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alRight
+          Caption = 'Consultar'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+          OnClick = btnConsultarClick
+          ExplicitTop = -3
+          ExplicitHeight = 61
+        end
+      end
+      object Panel7: TPanel
+        Left = 0
+        Top = 0
+        Width = 1091
+        Height = 55
+        Align = alTop
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 2
+        object lblCnpj: TLabel
+          Left = 0
+          Top = 0
+          Width = 1091
+          Height = 49
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'Consulta CNPJ'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clMenuHighlight
+          Font.Height = -33
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          ExplicitWidth = 1056
+        end
+      end
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 113
+    Width = 1091
+    Height = 535
+    Align = alClient
+    BevelOuter = bvNone
+    Color = clHighlightText
+    ParentBackground = False
+    TabOrder = 1
+    ExplicitTop = 107
+    ExplicitWidth = 553
+    ExplicitHeight = 469
+    object DBGrid1: TDBGrid
+      Left = 0
+      Top = 0
+      Width = 1091
+      Height = 535
+      Align = alClient
+      DataSource = DataSourceCNPJ
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
+      ReadOnly = True
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'CNPJ'
+          Width = 112
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'RAZAOSOCIAL'
+          Width = 275
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FANTASIA'
+          Width = 193
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SITUACAO'
+          Width = 68
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'EMAIL'
+          Width = 157
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'LOGRADOURO'
+          Width = 190
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NUMERO'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'COMPLEMENTO'
+          Width = 117
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'BAIRRO'
+          Width = 124
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'MUNICIPIO'
+          Width = 94
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'uf'
+          Width = 35
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CEP'
+          Visible = True
+        end>
+    end
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 648
+    Width = 1091
+    Height = 32
+    Align = alBottom
+    BevelOuter = bvNone
+    Color = clScrollBar
+    ParentBackground = False
+    TabOrder = 2
+    object lblOpen: TLabel
+      Left = 0
+      Top = -5
+      Width = 241
+      Height = 38
+      Margins.Left = 0
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 0
+      Caption = 'opencnpj.org'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -27
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object btnExportarCSV: TButton
+      Left = 885
+      Top = 0
+      Width = 75
+      Height = 32
+      Align = alRight
+      Caption = 'Exportar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnClick = btnExportarCSVClick
+      ExplicitLeft = 861
+      ExplicitTop = 6
+    end
+    object btnFechar: TButton
+      Left = 1029
+      Top = 0
+      Width = 62
+      Height = 32
+      Align = alRight
+      Caption = 'Fechar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+      TabStop = False
+      OnClick = btnFecharClick
+      ExplicitLeft = 1035
+      ExplicitTop = 6
+    end
+    object btnImprimir: TButton
+      Left = 960
+      Top = 0
+      Width = 69
+      Height = 32
+      Align = alRight
+      Caption = 'Imprimir'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = btnImprimirClick
+      ExplicitHeight = 48
+    end
+    object btnLimpar: TButton
+      Left = 810
+      Top = 0
+      Width = 75
+      Height = 32
+      Align = alRight
+      Caption = 'Limpar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+      OnClick = btnLimparClick
+      ExplicitLeft = 804
+      ExplicitHeight = 25
+    end
+  end
+  object DataSourceCNPJ: TDataSource
+    DataSet = cds
+    Left = 709
+    Top = 433
+  end
+  object cds: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 744
+    Top = 433
+    object cdsCNPJ: TStringField
+      FieldName = 'CNPJ'
+    end
+    object cdsrazao_social: TStringField
+      FieldName = 'RAZAOSOCIAL'
+      Size = 100
+    end
+    object cdsFANTASIA: TStringField
+      FieldName = 'FANTASIA'
+      Size = 100
+    end
+    object cdsLOGRADOURO: TStringField
+      FieldName = 'LOGRADOURO'
+      Size = 150
+    end
+    object cdsMUNICIPIO: TStringField
+      FieldName = 'MUNICIPIO'
+      Size = 100
+    end
+    object cdsUF: TStringField
+      FieldName = 'UF'
+      Size = 2
+    end
+    object cdsSITUACAO: TStringField
+      FieldName = 'SITUACAO'
+    end
+    object cdsNUMERO: TStringField
+      FieldName = 'NUMERO'
+      Size = 10
+    end
+    object cdsCOMPLEMENTO: TStringField
+      FieldName = 'COMPLEMENTO'
+      Size = 50
+    end
+    object cdsBAIRRO: TStringField
+      FieldName = 'BAIRRO'
+      Size = 50
+    end
+    object cdsCEP: TStringField
+      FieldName = 'CEP'
+      Size = 15
+    end
+    object cdsEMAIL: TStringField
+      DisplayWidth = 50
+      FieldName = 'EMAIL'
+      Size = 50
+    end
+  end
+  object RESTClient1: TRESTClient
+    Params = <>
+    Left = 576
+    Top = 432
+  end
+  object RESTRequest1: TRESTRequest
+    Client = RESTClient1
+    Params = <>
+    Response = RESTResponse1
+    SynchronizedEvents = False
+    Left = 616
+    Top = 432
+  end
+  object RESTResponse1: TRESTResponse
+    Left = 648
+    Top = 432
+  end
+  object SaveDialog1: TSaveDialog
+    Left = 680
+    Top = 432
+  end
+  object ppReport1: TppReport
+    AutoStop = False
+    DataPipeline = ppDBPipeline1
+    PassSetting = psTwoPass
+    PrinterSetup.BinName = 'Default'
+    PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Orientation = poLandscape
+    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.SaveDeviceSettings = False
+    PrinterSetup.mmMarginBottom = 6350
+    PrinterSetup.mmMarginLeft = 6350
+    PrinterSetup.mmMarginRight = 6350
+    PrinterSetup.mmMarginTop = 6350
+    PrinterSetup.mmPaperHeight = 215900
+    PrinterSetup.mmPaperWidth = 279400
+    PrinterSetup.PaperSize = 1
+    ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
+    DeviceType = 'Screen'
+    DefaultFileDeviceType = 'PDF'
+    EmailSettings.ReportFormat = 'PDF'
+    LanguageID = 'Default'
+    OpenFile = False
+    OutlineSettings.CreateNode = True
+    OutlineSettings.CreatePageNodes = True
+    OutlineSettings.Enabled = True
+    OutlineSettings.Visible = True
+    ThumbnailSettings.Enabled = True
+    ThumbnailSettings.Visible = True
+    ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    PDFSettings.EmbedFontOptions = [efUseSubset]
+    PDFSettings.EncryptSettings.AllowCopy = True
+    PDFSettings.EncryptSettings.AllowInteract = True
+    PDFSettings.EncryptSettings.AllowModify = True
+    PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
+    PDFSettings.EncryptSettings.Enabled = False
+    PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
+    PDFSettings.FontEncoding = feAnsi
+    PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
+    RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    RTFSettings.DefaultFont.Color = clWindowText
+    RTFSettings.DefaultFont.Height = -13
+    RTFSettings.DefaultFont.Name = 'Arial'
+    RTFSettings.DefaultFont.Style = []
+    TextFileName = '($MyDocuments)\Report.pdf'
+    TextSearchSettings.DefaultString = '<FindText>'
+    TextSearchSettings.Enabled = True
+    XLSSettings.AppName = 'ReportBuilder'
+    XLSSettings.Author = 'ReportBuilder'
+    XLSSettings.Subject = 'Report'
+    XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
+    Left = 352
+    Top = 416
+    Version = '19.03'
+    mmColumnWidth = 203200
+    DataPipelineName = 'ppDBPipeline1'
+    object ppHeaderBand1: TppHeaderBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 37835
+      mmPrintPosition = 0
+      object ppLabel1: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label1'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'CNPJ'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 1058
+        mmTop = 32016
+        mmWidth = 15081
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel2: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label2'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'RAZAOSOCIAL'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 20373
+        mmTop = 32016
+        mmWidth = 30692
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel3: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label3'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'EMAIL'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 88636
+        mmTop = 32015
+        mmWidth = 13494
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLine1: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line1'
+        Border.mmPadding = 0
+        Weight = 0.750000000000000000
+        mmHeight = 789
+        mmLeft = -2
+        mmTop = 37046
+        mmWidth = 266702
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel4: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label4'
+        Border.mmPadding = 0
+        Caption = 'CNPJ Listados'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 26
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 10848
+        mmLeft = 2381
+        mmTop = 6085
+        mmWidth = 64294
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppSystemVariable1: TppSystemVariable
+        DesignLayer = ppDesignLayer1
+        UserName = 'SystemVariable1'
+        Border.mmPadding = 0
+        VarType = vtDateTime
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = [fsBold]
+        Transparent = True
+        mmHeight = 5027
+        mmLeft = 227013
+        mmTop = 529
+        mmWidth = 39688
+        BandType = 0
+        LayerName = Foreground
+      end
+    end
+    object ppDetailBand1: TppDetailBand
+      Background1.Brush.Style = bsClear
+      Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 5027
+      mmPrintPosition = 0
+      object ppDBText1: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText1'
+        Border.mmPadding = 0
+        DataField = 'CNPJ'
+        DataPipeline = ppDBPipeline1
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'ppDBPipeline1'
+        mmHeight = 4763
+        mmLeft = 1058
+        mmTop = 264
+        mmWidth = 15081
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText2: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText2'
+        Border.mmPadding = 0
+        DataField = 'RAZAOSOCIAL'
+        DataPipeline = ppDBPipeline1
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'ppDBPipeline1'
+        mmHeight = 4763
+        mmLeft = 20373
+        mmTop = 264
+        mmWidth = 66675
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText3: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText3'
+        Border.mmPadding = 0
+        DataField = 'EMAIL'
+        DataPipeline = ppDBPipeline1
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'ppDBPipeline1'
+        mmHeight = 4763
+        mmLeft = 88636
+        mmTop = 264
+        mmWidth = 16933
+        BandType = 4
+        LayerName = Foreground
+      end
+    end
+    object ppFooterBand1: TppFooterBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 5027
+      mmPrintPosition = 0
+      object ppSystemVariable2: TppSystemVariable
+        DesignLayer = ppDesignLayer1
+        UserName = 'SystemVariable2'
+        Border.mmPadding = 0
+        VarType = vtPageSetDesc
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = [fsBold]
+        Transparent = True
+        mmHeight = 5027
+        mmLeft = 244475
+        mmTop = 0
+        mmWidth = 22225
+        BandType = 8
+        LayerName = Foreground
+      end
+    end
+    object ppDesignLayers1: TppDesignLayers
+      object ppDesignLayer1: TppDesignLayer
+        UserName = 'Foreground'
+        LayerType = ltBanded
+        Index = 0
+      end
+    end
+    object ppParameterList1: TppParameterList
+    end
+  end
+  object ppDBPipeline1: TppDBPipeline
+    DataSource = DataSourceCNPJ
+    UserName = 'DBPipeline1'
+    Left = 400
+    Top = 416
+    object ppDBPipeline1ppField1: TppField
+      FieldAlias = 'CNPJ'
+      FieldName = 'CNPJ'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 0
+      Searchable = False
+      Sortable = False
+    end
+    object ppDBPipeline1ppField2: TppField
+      FieldAlias = 'RAZAOSOCIAL'
+      FieldName = 'RAZAOSOCIAL'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 1
+      Searchable = False
+      Sortable = False
+    end
+    object ppDBPipeline1ppField3: TppField
+      FieldAlias = 'FANTASIA'
+      FieldName = 'FANTASIA'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 2
+      Searchable = False
+      Sortable = False
+    end
+    object ppDBPipeline1ppField4: TppField
+      FieldAlias = 'LOGRADOURO'
+      FieldName = 'LOGRADOURO'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 3
+      Searchable = False
+      Sortable = False
+    end
+    object ppDBPipeline1ppField5: TppField
+      FieldAlias = 'MUNICIPIO'
+      FieldName = 'MUNICIPIO'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 4
+      Searchable = False
+      Sortable = False
+    end
+    object ppDBPipeline1ppField6: TppField
+      FieldAlias = 'UF'
+      FieldName = 'UF'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 5
+      Searchable = False
+      Sortable = False
+    end
+    object ppDBPipeline1ppField7: TppField
+      FieldAlias = 'SITUACAO'
+      FieldName = 'SITUACAO'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 6
+      Searchable = False
+      Sortable = False
+    end
+    object ppDBPipeline1ppField8: TppField
+      FieldAlias = 'NUMERO'
+      FieldName = 'NUMERO'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 7
+      Searchable = False
+      Sortable = False
+    end
+    object ppDBPipeline1ppField9: TppField
+      FieldAlias = 'COMPLEMENTO'
+      FieldName = 'COMPLEMENTO'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 8
+      Searchable = False
+      Sortable = False
+    end
+    object ppDBPipeline1ppField10: TppField
+      FieldAlias = 'BAIRRO'
+      FieldName = 'BAIRRO'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 9
+      Searchable = False
+      Sortable = False
+    end
+    object ppDBPipeline1ppField11: TppField
+      FieldAlias = 'CEP'
+      FieldName = 'CEP'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 10
+      Searchable = False
+      Sortable = False
+    end
+    object ppDBPipeline1ppField12: TppField
+      FieldAlias = 'EMAIL'
+      FieldName = 'EMAIL'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 11
+      Searchable = False
+      Sortable = False
+    end
+  end
+end

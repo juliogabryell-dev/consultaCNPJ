@@ -1,0 +1,262 @@
+unit uPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB,
+  Vcl.Mask, Vcl.Grids, Vcl.DBGrids, Datasnap.DBClient, REST.Types, REST.Client,
+  Data.Bind.Components, Data.Bind.ObjectScope,System.JSON, ppDB, ppDBPipe,
+  ppComm, ppRelatv, ppProd, ppClass, ppReport, ppVar, ppCtrls, ppPrnabl,
+  ppBands, ppCache, ppDesignLayer, ppParameter;
+
+type
+  TfrmPrincipal = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    lblOpen: TLabel;
+    btnConsultar: TButton;
+    DBGrid1: TDBGrid;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    edtCNPJ: TMaskEdit;
+    Panel6: TPanel;
+    Panel7: TPanel;
+    lblCnpj: TLabel;
+    DataSourceCNPJ: TDataSource;
+    cds: TClientDataSet;
+    btnExportarCSV: TButton;
+    btnFechar: TButton;
+    btnImprimir: TButton;
+    btnLimpar: TButton;
+    RESTClient1: TRESTClient;
+    RESTRequest1: TRESTRequest;
+    RESTResponse1: TRESTResponse;
+    cdsCNPJ: TStringField;
+    cdsrazao_social: TStringField;
+    cdsFANTASIA: TStringField;
+    cdsLOGRADOURO: TStringField;
+    cdsMUNICIPIO: TStringField;
+    cdsUF: TStringField;
+    cdsSITUACAO: TStringField;
+    cdsNUMERO: TStringField;
+    cdsCOMPLEMENTO: TStringField;
+    cdsBAIRRO: TStringField;
+    cdsCEP: TStringField;
+    cdsEMAIL: TStringField;
+    SaveDialog1: TSaveDialog;
+    ppReport1: TppReport;
+    ppDBPipeline1: TppDBPipeline;
+    ppParameterList1: TppParameterList;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
+    ppHeaderBand1: TppHeaderBand;
+    ppDetailBand1: TppDetailBand;
+    ppFooterBand1: TppFooterBand;
+    ppLabel1: TppLabel;
+    ppDBText1: TppDBText;
+    ppLabel2: TppLabel;
+    ppDBText2: TppDBText;
+    ppLabel3: TppLabel;
+    ppDBText3: TppDBText;
+    ppLine1: TppLine;
+    ppLabel4: TppLabel;
+    ppSystemVariable1: TppSystemVariable;
+    ppSystemVariable2: TppSystemVariable;
+    procedure FormShow(Sender: TObject);
+    procedure btnFecharClick(Sender: TObject);
+    procedure btnConsultarClick(Sender: TObject);
+    procedure btnLimparClick(Sender: TObject);
+    procedure btnExportarCSVClick(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPrincipal: TfrmPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmPrincipal.btnConsultarClick(Sender: TObject);
+var
+  LRestClient: TRestClient;
+  LRestRequest: TRestRequest;
+  LRestResponse: TRestResponse;
+  LJson: TJSONObject;
+begin
+  if not cds.Active then
+    cds.CreateDataSet;
+
+  LRestClient := TRestClient.Create(nil);
+  LRestRequest := TRestRequest.Create(nil);
+  LRestResponse := TRestResponse.Create(nil);
+  try
+    LRestClient.BaseURL := 'https://api.opencnpj.org/';
+    LRestRequest.Client := LRestClient;
+    LRestRequest.Response := LRestResponse;
+    LRestRequest.Resource := '{cnpj}';
+    LRestRequest.Params.AddUrlSegment('cnpj', edtCNPJ.Text);
+    LRestRequest.Execute;
+
+    if LRestResponse.StatusCode = 200 then
+    begin
+      LJson := TJSONObject.ParseJSONValue(LRestResponse.Content) as TJSONObject;
+      try
+        cds.Append;
+        cds.FieldByName('FANTASIA').AsString := LJson.GetValue<string>('nome_fantasia', '');
+        cds.FieldByName('RAZAOSOCIAL').AsString := LJson.GetValue<string>('razao_social', '');
+        cds.FieldByName('SITUACAO').AsString := LJson.GetValue<string>('situacao_cadastral', '');
+        cds.FieldByName('CNPJ').AsString := LJson.GetValue<string>('cnpj', '');
+        cds.FieldByName('LOGRADOURO').AsString := LJson.GetValue<string>('logradouro', '');
+        cds.FieldByName('NUMERO').AsString := LJson.GetValue<string>('numero', '');
+        cds.FieldByName('COMPLEMENTO').AsString := LJson.GetValue<string>('complemento', '');
+        cds.FieldByName('BAIRRO').AsString := LJson.GetValue<string>('bairro', '');
+        cds.FieldByName('CEP').AsString := LJson.GetValue<string>('cep', '');
+        cds.FieldByName('MUNICIPIO').AsString := LJson.GetValue<string>('municipio', '');
+        cds.FieldByName('UF').AsString := LJson.GetValue<string>('uf', '');
+        cds.FieldByName('EMAIL').AsString := LJson.GetValue<string>('email', '');
+        cds.Post;
+      finally
+        LJson.Free;
+      end;
+    end
+    else
+    begin
+      ShowMessage('Erro ao consultar o CNPJ. Código: ' + LRestResponse.StatusCode.ToString);
+    end;
+  except
+    on E: Exception do
+      ShowMessage('Ocorreu um erro na comunicação com a API: ' + E.Message);
+  end;
+    LRestClient.Free;
+    LRestRequest.Free;
+    LRestResponse.Free;
+
+end;
+
+
+function QuoteCSV(const AText: string; const ADelimiter: Char = ';'): string;
+begin
+  if (AText.IndexOf(ADelimiter) > -1) or (AText.IndexOf('"') > -1) or
+     (AText.IndexOf(#13) > -1) or (AText.IndexOf(#10) > -1) then
+  begin
+    Result := '"' + StringReplace(AText, '"', '""', [rfReplaceAll]) + '"';
+  end
+  else
+    Result := AText;
+end;
+
+procedure ExportClientDataSetToCSV(ADataSet: TClientDataSet; const AFileName: string);
+const
+  DELIMITER = ';';
+var
+  i: Integer;
+  Line: string;
+  FileContent: TStringList;
+  Bookmark: TBookmark;
+begin
+  if not ADataSet.Active or (ADataSet.RecordCount = 0) then
+  begin
+    ShowMessage('Não há dados para exportar.');
+    Exit;
+  end;
+
+  FileContent := TStringList.Create;
+  try
+
+    Line := '';
+    for i := 0 to ADataSet.FieldCount - 1 do
+    begin
+      if i > 0 then
+        Line := Line + DELIMITER;
+      Line := Line + ADataSet.Fields[i].FieldName;
+    end;
+    FileContent.Add(Line);
+
+    Bookmark := ADataSet.GetBookmark;
+    try
+      ADataSet.DisableControls;
+      ADataSet.First;
+      while not ADataSet.Eof do
+      begin
+        Line := '';
+        for i := 0 to ADataSet.FieldCount - 1 do
+        begin
+          if i > 0 then
+            Line := Line + DELIMITER;
+          Line := Line + QuoteCSV(ADataSet.Fields[i].AsString, DELIMITER);
+        end;
+        FileContent.Add(Line);
+        ADataSet.Next;
+      end;
+    finally
+      ADataSet.GotoBookmark(Bookmark);
+      ADataSet.FreeBookmark(Bookmark);
+      ADataSet.EnableControls;
+    end;
+
+
+    FileContent.SaveToFile(AFileName, TEncoding.UTF8);
+    ShowMessage('Dados exportados com sucesso para ' + AFileName);
+
+  except
+    on E: Exception do
+      ShowMessage('Ocorreu um erro ao exportar o arquivo: ' + E.Message);
+  end;
+
+    FileContent.Free;
+
+end;
+
+procedure TfrmPrincipal.btnExportarCSVClick(Sender: TObject);
+begin
+  SaveDialog1.Title := 'Salvar arquivo CSV';
+  SaveDialog1.Filter := 'Arquivo CSV (*.csv)|*.csv';
+  SaveDialog1.DefaultExt := 'csv';
+  SaveDialog1.FileName := 'ConsultaCNPJ.csv';
+
+  if (cds.Active) and (cds.RecordCount > 0) and (SaveDialog1.Execute) then
+  begin
+    ExportClientDataSetToCSV(cds, SaveDialog1.FileName);
+  end
+  else
+  begin
+    ShowMessage('Não existe nenhum registro listado');
+  end;
+end;
+
+procedure TfrmPrincipal.btnFecharClick(Sender: TObject);
+begin
+Close;
+end;
+
+procedure TfrmPrincipal.btnImprimirClick(Sender: TObject);
+begin
+ if cds.Active then
+  begin
+    ppReport1.Print;
+  end
+  else
+  begin
+    showMessage('Não existe nenhum registro listado');
+  end;
+end;
+
+procedure TfrmPrincipal.btnLimparClick(Sender: TObject);
+begin
+edtCNPJ.Text := '';
+cds.EmptyDataSet;
+end;
+
+procedure TfrmPrincipal.FormShow(Sender: TObject);
+begin
+edtCNPJ.SetFocus;
+end;
+
+end.
